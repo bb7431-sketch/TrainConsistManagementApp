@@ -6,8 +6,30 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.Comparator;
 
 public class TrainApp {
+
+    // UC7: Bogie class to store name and capacity
+    static class Bogie {
+        String name;
+        int capacity;
+
+        public Bogie(String name, int capacity) {
+            this.name = name;
+            this.capacity = capacity;
+        }
+
+        public int getCapacity() {
+            return capacity;
+        }
+
+        @Override
+        public String toString() {
+            return name + " (" + capacity + " seats)";
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("=== Train Consist Management App ===");
         
@@ -91,5 +113,21 @@ public class TrainApp {
         for (Map.Entry<String, Integer> entry : capacityMap.entrySet()) {
             System.out.println("Bogie: " + entry.getKey() + " | Capacity: " + entry.getValue());
         }
+        
+        // UC7: Sort Bogies by Capacity (Comparator)
+        System.out.println("\n--- UC7: Sort Bogies by Capacity ---");
+        List<Bogie> passengerBogies = new ArrayList<>();
+        passengerBogies.add(new Bogie("Sleeper", 72));
+        passengerBogies.add(new Bogie("AC Chair", 78));
+        passengerBogies.add(new Bogie("First Class", 24));
+        
+        System.out.println("Before Sorting:");
+        System.out.println(passengerBogies);
+        
+        // Sort using custom Comparator logic
+        passengerBogies.sort(Comparator.comparingInt(Bogie::getCapacity));
+        
+        System.out.println("After Sorting by Capacity:");
+        System.out.println(passengerBogies);
     }
 }
