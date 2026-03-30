@@ -3,6 +3,8 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Set;
 
 public class TrainApp {
@@ -77,5 +79,17 @@ public class TrainApp {
         
         // Display final formation order, duplicate should be ignored
         System.out.println("Final Train Formation: " + formation);
+        
+        // UC6: Map Bogie to Capacity (HashMap)
+        System.out.println("\n--- UC6: Map Bogie to Capacity ---");
+        Map<String, Integer> capacityMap = new HashMap<>();
+        capacityMap.put("Sleeper", 72);
+        capacityMap.put("AC Chair", 78);
+        capacityMap.put("First Class", 24);
+        
+        System.out.println("Bogie Capacity Details:");
+        for (Map.Entry<String, Integer> entry : capacityMap.entrySet()) {
+            System.out.println("Bogie: " + entry.getKey() + " | Capacity: " + entry.getValue());
+        }
     }
 }
