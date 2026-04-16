@@ -138,5 +138,18 @@ public class TrainApp {
         
         System.out.println("Filtered High-Capacity Bogies (> 60 seats):");
         System.out.println(filteredBogies);
+        
+        // Add another Sleeper bogie to demonstrate grouping of multiple bogies in the same category
+        passengerBogies.add(new Bogie("Sleeper", 72));
+        
+        // UC9: Group Bogies by Type (Collectors.groupingBy)
+        System.out.println("\n--- UC9: Group Bogies by Type ---");
+        Map<String, List<Bogie>> groupedBogies = passengerBogies.stream()
+                .collect(java.util.stream.Collectors.groupingBy(b -> b.name));
+                
+        System.out.println("Bogies Grouped by Type:");
+        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
     }
 }
