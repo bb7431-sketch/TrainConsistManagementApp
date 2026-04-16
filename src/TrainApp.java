@@ -178,5 +178,46 @@ public class TrainApp {
             java.util.regex.Matcher m = cargoCodePattern.matcher(code);
             System.out.println("Cargo Code: " + code + " | Valid: " + m.matches());
         }
+        
+        // UC12: Safety Compliance Check for Goods Bogies
+        System.out.println("\n--- UC12: Safety Compliance Check for Goods Bogies ---");
+        
+        List<GoodsBogie> goodsBogies = new ArrayList<>();
+        goodsBogies.add(new GoodsBogie("Box", "Electronics"));
+        goodsBogies.add(new GoodsBogie("Open", "Coal"));
+        goodsBogies.add(new GoodsBogie("Cylindrical", "Petroleum"));
+        
+        boolean isSafe = goodsBogies.stream()
+                .allMatch(b -> {
+                    if ("Cylindrical".equals(b.type)) {
+                        return "Petroleum".equals(b.cargo);
+                    }
+                    return true;
+                });
+        
+        System.out.println("Train Formation Safety (Safe check): " + isSafe);
+        
+        // Add an unsafe cylindrical bogie
+        goodsBogies.add(new GoodsBogie("Cylindrical", "Coal"));
+        boolean isSafe2 = goodsBogies.stream()
+                .allMatch(b -> {
+                    if ("Cylindrical".equals(b.type)) {
+                        return "Petroleum".equals(b.cargo);
+                    }
+                    return true;
+                });
+                
+        System.out.println("Train Formation Safety (Unsafe check): " + isSafe2);
+    }
+    
+    // UC12: GoodsBogie class to store type and cargo
+    static class GoodsBogie {
+        String type;
+        String cargo;
+
+        public GoodsBogie(String type, String cargo) {
+            this.type = type;
+            this.cargo = cargo;
+        }
     }
 }
