@@ -208,6 +208,39 @@ public class TrainApp {
                 });
                 
         System.out.println("Train Formation Safety (Unsafe check): " + isSafe2);
+        
+        // UC13: Performance Comparison (Loops vs Streams)
+        System.out.println("\n--- UC13: Performance Comparison (Loops vs Streams) ---");
+        
+        List<Bogie> largeBogieList = new ArrayList<>();
+        for (int i = 0; i < 1000000; i++) {
+            int capacity = (i % 2 == 0) ? 72 : 50; // Mix of capacities
+            largeBogieList.add(new Bogie("Bogie" + i, capacity));
+        }
+        
+        // Measure Loop Filtering Performance
+        long loopStartTime = System.nanoTime();
+        List<Bogie> loopFiltered = new ArrayList<>();
+        for (Bogie b : largeBogieList) {
+            if (b.capacity > 60) {
+                loopFiltered.add(b);
+            }
+        }
+        long loopEndTime = System.nanoTime();
+        long loopDuration = loopEndTime - loopStartTime;
+        
+        // Measure Stream Filtering Performance
+        long streamStartTime = System.nanoTime();
+        List<Bogie> streamFiltered = largeBogieList.stream()
+                .filter(b -> b.capacity > 60)
+                .collect(java.util.stream.Collectors.toList());
+        long streamEndTime = System.nanoTime();
+        long streamDuration = streamEndTime - streamStartTime;
+        
+        System.out.println("Loop Filter Result Size   : " + loopFiltered.size());
+        System.out.println("Stream Filter Result Size : " + streamFiltered.size());
+        System.out.println("Loop Filtering Time (ns)  : " + loopDuration);
+        System.out.println("Stream Filtering Time (ns): " + streamDuration);
     }
     
     // UC12: GoodsBogie class to store type and cargo
