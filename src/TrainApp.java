@@ -154,9 +154,14 @@ public class TrainApp {
         
         // UC10: Count Total Seats in Train (reduce)
         System.out.println("\n--- UC10: Count Total Seats in Train (reduce) ---");
-        int totalSeats = passengerBogies.stream()
+        int totalSeats = calculateTotalSeats(passengerBogies);
+        System.out.println("Total Seating Capacity: " + totalSeats);
+    }
+    
+    // UC10 logic refactored for testing
+    public static int calculateTotalSeats(List<Bogie> bogies) {
+        return bogies.stream()
                 .map(b -> b.capacity)
                 .reduce(0, Integer::sum);
-        System.out.println("Total Seating Capacity: " + totalSeats);
     }
 }
