@@ -132,11 +132,16 @@ public class TrainApp {
         
         // UC8: Filter Passenger Bogies Using Streams
         System.out.println("\n--- UC8: Filter Passenger Bogies Using Streams ---");
-        List<Bogie> filteredBogies = passengerBogies.stream()
-                .filter(b -> b.capacity > 60)
-                .collect(java.util.stream.Collectors.toList());
+        List<Bogie> filteredBogies = filterHighCapacityBogies(passengerBogies);
         
         System.out.println("Filtered High-Capacity Bogies (> 60 seats):");
         System.out.println(filteredBogies);
+    }
+    
+    // UC8 logic refactored for testing
+    public static List<Bogie> filterHighCapacityBogies(List<Bogie> passengerBogies) {
+        return passengerBogies.stream()
+                .filter(b -> b.capacity > 60)
+                .collect(java.util.stream.Collectors.toList());
     }
 }
