@@ -333,6 +333,30 @@ public class TrainApp {
         String[] duplicateBogieNames = {"Sleeper", "AC Chair", "Sleeper", "General"};
         java.util.Arrays.sort(duplicateBogieNames);
         System.out.println("Sorted Duplicates   : " + java.util.Arrays.toString(duplicateBogieNames));
+        
+        // UC18: Linear Search for Bogie ID 
+        System.out.println("\n--- UC18: Linear Search for Bogie ID ---");
+        String[] bogieSearchList = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+        
+        String target1 = "BG309";
+        boolean found1 = false;
+        for (String id : bogieSearchList) {
+            if (id.equals(target1)) {
+                found1 = true;
+                break;
+            }
+        }
+        System.out.println("Search Key: " + target1 + " | Found: " + found1);
+        
+        String target2 = "BG999";
+        boolean found2 = false;
+        for (String id : bogieSearchList) {
+            if (id.equals(target2)) {
+                found2 = true;
+                break;
+            }
+        }
+        System.out.println("Search Key: " + target2 + " | Found: " + found2);
     }
     
     // UC12: GoodsBogie class to store type and cargo
