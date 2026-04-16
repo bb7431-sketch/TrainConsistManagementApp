@@ -266,6 +266,31 @@ public class TrainApp {
         } catch (InvalidCapacityException e) {
             System.out.println("Caught Exception: " + e.getMessage());
         }
+        
+        // UC15: Safe Cargo Assignment Using try-catch-finally
+        System.out.println("\n--- UC15: Safe Cargo Assignment Using try-catch-finally ---");
+        GoodsBogie cylindricalBogie = new GoodsBogie("Cylindrical", "Empty");
+        GoodsBogie rectangularBogie = new GoodsBogie("Rectangular", "Empty");
+        
+        System.out.println("Attempting safe assignment...");
+        try {
+            cylindricalBogie.assignCargo("Petroleum");
+        } catch (CargoSafetyException e) {
+            System.out.println("Caught Exception: " + e.getMessage());
+        } finally {
+            System.out.println("Cargo validation check completed for Cylindrical bogie.");
+        }
+        
+        System.out.println("\nAttempting unsafe assignment...");
+        try {
+            rectangularBogie.assignCargo("Petroleum");
+        } catch (CargoSafetyException e) {
+            System.out.println("Caught Exception: " + e.getMessage());
+        } finally {
+            System.out.println("Cargo validation check completed for Rectangular bogie.");
+        }
+        
+        System.out.println("\nProgram execution continues successfully after exception handling.");
     }
     
     // UC12: GoodsBogie class to store type and cargo
@@ -277,11 +302,26 @@ public class TrainApp {
             this.type = type;
             this.cargo = cargo;
         }
+
+        public void assignCargo(String newCargo) {
+            if ("Rectangular".equalsIgnoreCase(this.type) && "Petroleum".equalsIgnoreCase(newCargo)) {
+                throw new CargoSafetyException("Unsafe Assignment: Cannot assign Petroleum to a Rectangular bogie.");
+            }
+            this.cargo = newCargo;
+            System.out.println("Cargo '" + newCargo + "' successfully assigned to " + this.type + " bogie.");
+        }
     }
 
     // UC14: Custom Exception class for invalid capacity
     static class InvalidCapacityException extends Exception {
         public InvalidCapacityException(String message) {
+            super(message);
+        }
+    }
+
+    // UC15: Custom Runtime Exception class for unsafe cargo assignments
+    static class CargoSafetyException extends RuntimeException {
+        public CargoSafetyException(String message) {
             super(message);
         }
     }
