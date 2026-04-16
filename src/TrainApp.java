@@ -319,6 +319,20 @@ public class TrainApp {
             System.out.print(c + " ");
         }
         System.out.println();
+        
+        // UC17: Sort Bogie Names Using Arrays.sort()
+        System.out.println("\n--- UC17: Sort Bogie Names Using Arrays.sort() ---");
+        String[] bogieNames = {"Sleeper", "AC Chair", "First Class", "General", "Luxury"};
+        System.out.println("Original Bogie Names: " + java.util.Arrays.toString(bogieNames));
+        
+        java.util.Arrays.sort(bogieNames);
+        
+        System.out.println("Sorted Bogie Names  : " + java.util.Arrays.toString(bogieNames));
+        
+        // Testing duplicates
+        String[] duplicateBogieNames = {"Sleeper", "AC Chair", "Sleeper", "General"};
+        java.util.Arrays.sort(duplicateBogieNames);
+        System.out.println("Sorted Duplicates   : " + java.util.Arrays.toString(duplicateBogieNames));
     }
     
     // UC12: GoodsBogie class to store type and cargo
