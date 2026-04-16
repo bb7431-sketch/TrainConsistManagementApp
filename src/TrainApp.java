@@ -151,5 +151,12 @@ public class TrainApp {
         for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
+        
+        // UC10: Count Total Seats in Train (reduce)
+        System.out.println("\n--- UC10: Count Total Seats in Train (reduce) ---");
+        int totalSeats = passengerBogies.stream()
+                .map(b -> b.capacity)
+                .reduce(0, Integer::sum);
+        System.out.println("Total Seating Capacity: " + totalSeats);
     }
 }
