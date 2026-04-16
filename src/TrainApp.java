@@ -357,6 +357,36 @@ public class TrainApp {
             }
         }
         System.out.println("Search Key: " + target2 + " | Found: " + found2);
+        
+        // UC19: Binary Search for Bogie ID (Optimized Searching)
+        System.out.println("\n--- UC19: Binary Search for Bogie ID ---");
+        String[] binarySearchList = {"BG309", "BG101", "BG550", "BG205", "BG412"};
+        
+        // Ensure array is sorted before binary search
+        java.util.Arrays.sort(binarySearchList);
+        System.out.println("Sorted Array for Binary Search: " + java.util.Arrays.toString(binarySearchList));
+        
+        String[] bTargets = {"BG309", "BG999"};
+        for (String key : bTargets) {
+            int low = 0;
+            int high = binarySearchList.length - 1;
+            boolean bFound = false;
+            
+            while (low <= high) {
+                int mid = low + (high - low) / 2;
+                int cmp = key.compareTo(binarySearchList[mid]);
+                
+                if (cmp == 0) {
+                    bFound = true;
+                    break;
+                } else if (cmp < 0) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+            }
+            System.out.println("Binary Search Key: " + key + " | Found: " + bFound);
+        }
     }
     
     // UC12: GoodsBogie class to store type and cargo
