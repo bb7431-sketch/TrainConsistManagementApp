@@ -387,6 +387,40 @@ public class TrainApp {
             }
             System.out.println("Binary Search Key: " + key + " | Found: " + bFound);
         }
+        
+        // UC20: Exception Handling During Search Operations
+        System.out.println("\n--- UC20: Exception Handling During Search Operations ---");
+        
+        String[] emptyBogieList = {};
+        String[] validBogieList = {"BG101", "BG205", "BG309"};
+        
+        System.out.println("Attempting search on empty bogie list...");
+        try {
+            if (emptyBogieList.length == 0) {
+                throw new IllegalStateException("Search Failed: Bogie collection is empty!");
+            }
+            System.out.println("Search executed.");
+        } catch (IllegalStateException e) {
+            System.out.println("Caught Exception: " + e.getMessage());
+        }
+        
+        System.out.println("\nAttempting search on populated bogie list...");
+        try {
+            if (validBogieList.length == 0) {
+                throw new IllegalStateException("Search Failed: Bogie collection is empty!");
+            }
+            String searchTarget = "BG205";
+            boolean isFound = false;
+            for (String bogie : validBogieList) {
+                if (bogie.equals(searchTarget)) {
+                    isFound = true;
+                    break;
+                }
+            }
+            System.out.println("Search Key: " + searchTarget + " | Found: " + isFound);
+        } catch (IllegalStateException e) {
+            System.out.println("Caught Exception: " + e.getMessage());
+        }
     }
     
     // UC12: GoodsBogie class to store type and cargo
