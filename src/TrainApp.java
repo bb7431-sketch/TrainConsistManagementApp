@@ -129,5 +129,14 @@ public class TrainApp {
         
         System.out.println("After Sorting by Capacity:");
         System.out.println(passengerBogies);
+        
+        // UC8: Filter Passenger Bogies Using Streams
+        System.out.println("\n--- UC8: Filter Passenger Bogies Using Streams ---");
+        List<Bogie> filteredBogies = passengerBogies.stream()
+                .filter(b -> b.capacity > 60)
+                .collect(java.util.stream.Collectors.toList());
+        
+        System.out.println("Filtered High-Capacity Bogies (> 60 seats):");
+        System.out.println(filteredBogies);
     }
 }
