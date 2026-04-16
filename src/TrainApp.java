@@ -291,6 +291,34 @@ public class TrainApp {
         }
         
         System.out.println("\nProgram execution continues successfully after exception handling.");
+        
+        // UC16: Sort Passenger Bogies by Capacity (Bubble Sort)
+        System.out.println("\n--- UC16: Sort Passenger Bogies by Capacity (Bubble Sort) ---");
+        int[] capacities = {72, 56, 24, 70, 60};
+        System.out.print("Original Capacities: ");
+        for (int c : capacities) {
+            System.out.print(c + " ");
+        }
+        System.out.println();
+        
+        // Bubble Sort Logic
+        int n = capacities.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - 1 - i; j++) {
+                if (capacities[j] > capacities[j + 1]) {
+                    // Swap elements
+                    int temp = capacities[j];
+                    capacities[j] = capacities[j + 1];
+                    capacities[j + 1] = temp;
+                }
+            }
+        }
+        
+        System.out.print("Sorted Capacities  : ");
+        for (int c : capacities) {
+            System.out.print(c + " ");
+        }
+        System.out.println();
     }
     
     // UC12: GoodsBogie class to store type and cargo
