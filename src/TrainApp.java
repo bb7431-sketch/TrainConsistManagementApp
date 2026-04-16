@@ -15,7 +15,10 @@ public class TrainApp {
         String name;
         int capacity;
 
-        public Bogie(String name, int capacity) {
+        public Bogie(String name, int capacity) throws InvalidCapacityException {
+            if (capacity <= 0) {
+                throw new InvalidCapacityException("Capacity must be greater than zero");
+            }
             this.name = name;
             this.capacity = capacity;
         }
@@ -30,7 +33,7 @@ public class TrainApp {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidCapacityException {
         System.out.println("=== Train Consist Management App ===");
         
         // UC1: Initialize an empty List using ArrayList
@@ -241,6 +244,28 @@ public class TrainApp {
         System.out.println("Stream Filter Result Size : " + streamFiltered.size());
         System.out.println("Loop Filtering Time (ns)  : " + loopDuration);
         System.out.println("Stream Filtering Time (ns): " + streamDuration);
+        
+        // UC14: Handle Invalid Bogie Capacity (Custom Exception)
+        System.out.println("\n--- UC14: Handle Invalid Bogie Capacity (Custom Exception) ---");
+        try {
+            System.out.println("Attempting to create a valid bogie...");
+            Bogie validBogie = new Bogie("General", 90);
+            System.out.println("Success: " + validBogie);
+            
+            System.out.println("Attempting to create a bogie with zero capacity...");
+            Bogie zeroBogie = new Bogie("Zero", 0);
+            System.out.println("Success: " + zeroBogie);
+        } catch (InvalidCapacityException e) {
+            System.out.println("Caught Exception: " + e.getMessage());
+        }
+        
+        try {
+            System.out.println("Attempting to create a bogie with negative capacity...");
+            Bogie negativeBogie = new Bogie("Negative", -10);
+            System.out.println("Success: " + negativeBogie);
+        } catch (InvalidCapacityException e) {
+            System.out.println("Caught Exception: " + e.getMessage());
+        }
     }
     
     // UC12: GoodsBogie class to store type and cargo
@@ -251,6 +276,13 @@ public class TrainApp {
         public GoodsBogie(String type, String cargo) {
             this.type = type;
             this.cargo = cargo;
+        }
+    }
+
+    // UC14: Custom Exception class for invalid capacity
+    static class InvalidCapacityException extends Exception {
+        public InvalidCapacityException(String message) {
+            super(message);
         }
     }
 }
