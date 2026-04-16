@@ -144,12 +144,17 @@ public class TrainApp {
         
         // UC9: Group Bogies by Type (Collectors.groupingBy)
         System.out.println("\n--- UC9: Group Bogies by Type ---");
-        Map<String, List<Bogie>> groupedBogies = passengerBogies.stream()
-                .collect(java.util.stream.Collectors.groupingBy(b -> b.name));
+        Map<String, List<Bogie>> groupedBogies = groupBogiesByType(passengerBogies);
                 
         System.out.println("Bogies Grouped by Type:");
         for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
+    }
+    
+    // UC9 logic refactored for testing
+    public static Map<String, List<Bogie>> groupBogiesByType(List<Bogie> bogies) {
+        return bogies.stream()
+                .collect(java.util.stream.Collectors.groupingBy(b -> b.name));
     }
 }
